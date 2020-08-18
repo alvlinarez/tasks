@@ -1,0 +1,112 @@
+/* LATERAL BAR */
+aside #tasks {
+    padding: 3rem;
+}
+
+.new-project-form {
+    margin-top: 6rem;
+}
+.new-project-form .input-text {
+    border-bottom: 1px solid var(--gray2);
+    border-radius: 0;
+    background-color: var(--gray1);
+}
+.new-project-form .input-text::placeholder{
+    color: var(--gray2);
+}
+.projects {
+    margin-top: 10rem;
+}
+.projects-list li {
+    margin-bottom: 2rem;
+}
+.projects-list li a {
+    font-size: 1.4rem;
+    color: var(--gray2);
+    line-height: 1.5;
+    font-weight: 300;
+}
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--gray2);
+    padding: 4rem;
+}
+.user-name {
+    color: var(--white);
+    font-size: 2.2rem;
+    margin: 0;
+}
+.user-name span {
+    font-weight: 900;
+}
+.nav-principal a {
+    color: var(--white);
+    text-decoration: none;
+}
+.nav-principal a:first-of-type {
+    margin-right: 2rem;
+}
+
+.sign-out {
+    color: var(--white);
+}
+
+@media (min-width: 768px) {
+    .container-app {
+        display: flex;
+        min-height: 100vh;
+    }
+
+    aside #tasks  {
+        background-color: var(--white);
+        flex: 0 0 300px;
+    }
+    .section-principal {
+        flex: 1;
+    }
+
+}
+
+/** BUTTONS **/
+.btn {
+    margin-top: 2rem;
+    font-family: var(--headingFont);
+    padding: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 400;
+    border-radius: .5rem;
+    border: none;
+    transition: background-color .3s ease;
+}
+.btn:hover {
+    cursor: pointer;
+}
+.btn-primary {
+    background-color: var(--gray2);
+    color: var(--white);
+}
+.btn-primary:hover {
+    background: var(--gray3);
+}
+.btn-secondary {
+    background-color: var(--gray1);
+}
+
+.btn-delete {
+    background-color: var(--white);
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+.btn-submit:hover {
+    background-color: var(--gray2);
+}
+.btn-blank {
+    margin: 0;
+    padding: 0;
+    display: block;
+    background-color: transparent;
+}

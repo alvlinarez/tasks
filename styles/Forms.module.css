@@ -1,0 +1,59 @@
+.userForm {
+  background-color: var(--gray2);
+  height: 100vh;
+  min-height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerForm {
+  padding: 5rem 3rem;
+  max-width: 500px;
+  width: 95%;
+  background-color: var(--white);
+  border-radius: 1rem;
+}
+
+.fieldForm {
+  display: flex;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+.fieldForm:last-of-type {
+  margin: 0;
+}
+.fieldForm label {
+  flex: 0 0 100px;
+  font-family: var(--textFont);
+}
+.fieldForm input[type='password'],
+.fieldForm input[type='email'],
+.fieldForm input[type='text'] {
+  border: 1px solid #e1e1e1;
+  padding: 1rem;
+  flex: 1;
+}
+
+.inputError p {
+  color: #c53030;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.shadow {
+  -webkit-box-shadow: 0px 4px 10px -3px rgba(117, 117, 117, 1);
+  -moz-box-shadow: 0px 4px 10px -3px rgba(117, 117, 117, 1);
+  box-shadow: 0px 4px 10px -3px rgba(117, 117, 117, 1);
+}
+.shadowDark {
+  -webkit-box-shadow: 0px 6px 11px -8px rgba(0, 0, 0, 0.9);
+  -moz-box-shadow: 0px 6px 11px -8px rgba(0, 0, 0, 0.9);
+  box-shadow: 0px 6px 11px -8px rgba(0, 0, 0, 0.9);
+}
+
+.linkAccount {
+  margin-top: 2rem;
+  display: block;
+  opacity: 0.7;
+}

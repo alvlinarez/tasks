@@ -1,0 +1,42 @@
+/** BUTTONS **/
+.btn {
+    margin-top: 2rem;
+    font-family: var(--headingFont);
+    padding: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 400;
+    border-radius: .5rem;
+    border: none;
+    transition: background-color .3s ease;
+}
+.btn:hover {
+    cursor: pointer;
+}
+.btnPrimary {
+    background-color: var(--gray2);
+    color: var(--white);
+}
+.btnPrimary:hover {
+    background: var(--gray3);
+}
+.btnSecondary {
+    background-color: var(--gray1);
+}
+
+.btnDelete {
+    background-color: var(--white);
+}
+
+.btnBlock {
+    display: block;
+    width: 100%;
+}
+.btnSubmit:hover {
+    background-color: var(--gray2);
+}
+.btnBlank {
+    margin: 0;
+    padding: 0;
+    display: block;
+    background-color: transparent;
+}
