@@ -15,13 +15,13 @@ import {
   USER_NOT_AUTHENTICATED_SUCCESS
 } from '../../types/authTypes';
 
-export const AuthState = ({ user, children }) => {
+export const AuthState = ({ user = {}, children }) => {
   const initialState = {
     user,
     error: null,
     authenticated: Object.keys(user).length > 0,
     message: null,
-    authLoading: true
+    authLoading: false
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);

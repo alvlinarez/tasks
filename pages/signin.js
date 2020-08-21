@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 
+import Spinner from '../components/Spinner';
 import formStyles from '../styles/Forms.module.css';
 import buttonStyles from '../styles/Buttons.module.css';
 import alertStyles from '../styles/Alerts.module.css';
 import HeadSeo from '../components/HeadSeo';
+import { AuthContext } from '../context/auth/authContext';
 
 const SignIn = () => {
+  const authContext = useContext(AuthContext);
+  const { authLoading, signIn, message, error } = authContext;
+
+  const router = useRouter();
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -18,7 +26,9 @@ const SignIn = () => {
       email: yup.string().email('Invalid email').required('Email is required'),
       password: yup.string().required('Password is required')
     }),
-    onSubmit: (values) => {}
+    onSubmit: (values) => {
+      signIn(values, router);
+    }
   });
 
   return (
@@ -63,12 +73,18 @@ const SignIn = () => {
               </div>
             )}
             <div className={formStyles.fieldForm}>
-              <button
-                type="submit"
-                className={`${buttonStyles.btn} ${buttonStyles.btnPrimary} ${buttonStyles.btnBlock}`}
-              >
-                Sign In
-              </button>
+              {authLoading ? (
+                <div className={formStyles.spinnerAuthContainer}>
+                  <Spinner />
+                </div>
+              ) : (
+                <button
+                  type="submit"
+                  className={`${buttonStyles.btn} ${buttonStyles.btnPrimary} ${buttonStyles.btnBlock}`}
+                >
+                  Sign In
+                </button>
+              )}
             </div>
           </form>
           <Link href="/signup">

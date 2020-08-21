@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
@@ -6,8 +6,15 @@ import formStyles from '../styles/Forms.module.css';
 import buttonStyles from '../styles/Buttons.module.css';
 import Link from 'next/link';
 import HeadSeo from '../components/HeadSeo';
+import { AuthContext } from '../context/auth/authContext';
+import { useRouter } from 'next/router';
+import Spinner from '../components/Spinner';
 
 const SignUp = () => {
+  const authContext = useContext(AuthContext);
+  const { authLoading, signUp, message, error } = authContext;
+  const router = useRouter();
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -22,7 +29,9 @@ const SignUp = () => {
         .required('Password is required')
         .length(6, 'Password must be at least 6 characters')
     }),
-    onSubmit: (values) => {}
+    onSubmit: (values) => {
+      signUp(values, router);
+    }
   });
   return (
     <>
@@ -83,12 +92,18 @@ const SignUp = () => {
               </div>
             )}
             <div className={formStyles.fieldForm}>
-              <button
-                type="submit"
-                className={`${buttonStyles.btn} ${buttonStyles.btnPrimary} ${buttonStyles.btnBlock}`}
-              >
-                Sign Up
-              </button>
+              {authLoading ? (
+                <div className={formStyles.spinnerAuthContainer}>
+                  <Spinner />
+                </div>
+              ) : (
+                <button
+                  type="submit"
+                  className={`${buttonStyles.btn} ${buttonStyles.btnPrimary} ${buttonStyles.btnBlock}`}
+                >
+                  Sign Up
+                </button>
+              )}
             </div>
           </form>
           <Link href="/signin">
