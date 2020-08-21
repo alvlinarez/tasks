@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as yup from 'yup';
@@ -10,12 +10,22 @@ import buttonStyles from '../styles/Buttons.module.css';
 import alertStyles from '../styles/Alerts.module.css';
 import HeadSeo from '../components/HeadSeo';
 import { AuthContext } from '../context/auth/authContext';
+import { AlertContext } from '../context/alerts/alertContext';
 
 const SignIn = () => {
   const authContext = useContext(AuthContext);
-  const { authLoading, signIn, message, error } = authContext;
+  const { authLoading, signIn, error } = authContext;
+
+  const alertContext = useContext(AlertContext);
+  const { alert, showAlert } = alertContext;
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (error) {
+      showAlert(error);
+    }
+  }, [error]);
 
   const formik = useFormik({
     initialValues: {
@@ -35,6 +45,11 @@ const SignIn = () => {
     <>
       <HeadSeo title="Sign In" />
       <div className={formStyles.userForm}>
+        {alert && (
+          <div className={`${alertStyles.alert} ${alertStyles.alertError}`}>
+            {alert.message}
+          </div>
+        )}
         <div className={`${formStyles.containerForm} ${formStyles.shadowDark}`}>
           <h1>Sign In</h1>
           <form onSubmit={formik.handleSubmit}>

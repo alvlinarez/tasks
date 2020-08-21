@@ -1,18 +1,16 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import authReducer from './authReducer';
 import { axiosClient } from '../../config/axios';
 import { AuthContext } from './authContext';
 import {
   AUTH_LOADING,
+  RESET_AUTH_MESSAGE,
   SIGN_IN_ERROR,
   SIGN_IN_SUCCESS,
   SIGN_OUT_ERROR,
   SIGN_OUT_SUCCESS,
   SIGN_UP_ERROR,
-  SIGN_UP_SUCCESS,
-  USER_AUTHENTICATED_ERROR,
-  USER_AUTHENTICATED_SUCCESS,
-  USER_NOT_AUTHENTICATED_SUCCESS
+  SIGN_UP_SUCCESS
 } from '../../types/authTypes';
 
 export const AuthState = ({ user = {}, children }) => {
@@ -62,7 +60,13 @@ export const AuthState = ({ user = {}, children }) => {
         type: SIGN_UP_SUCCESS,
         payload: data.message
       });
-      router.push('/signin');
+      // setTimeout to wait for showing Alert and then redirect
+      setTimeout(() => {
+        router.push('/signin');
+        dispatch({
+          type: RESET_AUTH_MESSAGE
+        });
+      }, 1500);
     } catch (e) {
       dispatch({
         type: SIGN_UP_ERROR,

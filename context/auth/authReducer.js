@@ -5,40 +5,12 @@ import {
   SIGN_UP_ERROR,
   SIGN_OUT_SUCCESS,
   SIGN_OUT_ERROR,
-  USER_AUTHENTICATED_ERROR,
-  USER_AUTHENTICATED_SUCCESS,
   AUTH_LOADING,
-  RESET_AUTH_MESSAGE,
-  USER_NOT_AUTHENTICATED_SUCCESS
+  RESET_AUTH_MESSAGE
 } from '../../types/authTypes';
-// const initialState = {
-//   user: {},
-//   error: null,
-//   authenticated: false,
-//   message: null,
-//   authLoading: false
-// };
 
 const authReducer = (state, action) => {
   switch (action.type) {
-    case USER_AUTHENTICATED_SUCCESS: {
-      return {
-        ...state,
-        user: action.payload,
-        authenticated: true,
-        authLoading: false,
-        error: null
-      };
-    }
-    case USER_NOT_AUTHENTICATED_SUCCESS: {
-      return {
-        ...state,
-        user: {},
-        authenticated: false,
-        authLoading: false,
-        error: null
-      };
-    }
     case SIGN_UP_SUCCESS:
       return {
         ...state,
@@ -68,14 +40,14 @@ const authReducer = (state, action) => {
         ...state,
         message: null
       };
-    case USER_AUTHENTICATED_ERROR:
     case SIGN_OUT_ERROR:
     case SIGN_IN_ERROR:
     case SIGN_UP_ERROR:
       return {
         ...state,
         error: action.payload,
-        authLoading: false
+        authLoading: false,
+        message: null
       };
     case AUTH_LOADING:
       return {

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
@@ -9,11 +9,26 @@ import HeadSeo from '../components/HeadSeo';
 import { AuthContext } from '../context/auth/authContext';
 import { useRouter } from 'next/router';
 import Spinner from '../components/Spinner';
+import { AlertContext } from '../context/alerts/alertContext';
+import alertStyles from '../styles/Alerts.module.css';
 
 const SignUp = () => {
   const authContext = useContext(AuthContext);
   const { authLoading, signUp, message, error } = authContext;
+
+  const alertContext = useContext(AlertContext);
+  const { alert, showAlert } = alertContext;
+
   const router = useRouter();
+
+  useEffect(() => {
+    if (message) {
+      showAlert(message);
+    }
+    if (error) {
+      showAlert(error);
+    }
+  }, [message, error]);
 
   const formik = useFormik({
     initialValues: {
@@ -27,7 +42,7 @@ const SignUp = () => {
       password: yup
         .string()
         .required('Password is required')
-        .length(6, 'Password must be at least 6 characters')
+        .min(6, 'Password must be at least 6 characters')
     }),
     onSubmit: (values) => {
       signUp(values, router);
@@ -37,6 +52,15 @@ const SignUp = () => {
     <>
       <HeadSeo title="Sign Up" />
       <div className={formStyles.userForm}>
+        {alert && (
+          <div
+            className={`${alertStyles.alert} ${
+              message ? alertStyles.alertOk : alertStyles.alertError
+            }`}
+          >
+            {alert.message}
+          </div>
+        )}
         <div className={`${formStyles.containerForm} ${formStyles.shadowDark}`}>
           <h1>Sign Up</h1>
           <form onSubmit={formik.handleSubmit}>

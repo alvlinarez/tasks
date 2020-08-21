@@ -8,6 +8,7 @@ import { axiosClient } from '../config/axios';
 import { getToken } from '../utils/getToken';
 import { routes } from '../utils/routes';
 import Error from '../components/Error';
+import { AlertState } from '../context/alerts/AlertState';
 
 export const redirectUser = (ctx, location) => {
   if (ctx.req) {
@@ -24,9 +25,11 @@ function MyApp({ Component, pageProps }) {
     return <Error error={error} />;
   }
   return (
-    <AuthState user={user}>
-      <Component {...pageProps} />
-    </AuthState>
+    <AlertState>
+      <AuthState user={user}>
+        <Component {...pageProps} />
+      </AuthState>
+    </AlertState>
   );
 }
 
