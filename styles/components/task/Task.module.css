@@ -1,0 +1,53 @@
+.tasks {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--white);
+  padding: 0.5rem 2rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+}
+
+.tasks .actions .btn:first-of-type {
+  margin-right: 1rem;
+}
+.tasks p {
+  font-size: 1.6rem;
+  flex: 1;
+  padding-right: 2rem;
+}
+.tasks .btn {
+  padding: 0.8rem;
+  font-size: 1.4rem;
+  border-radius: 0;
+  margin: 0;
+}
+
+.shadow {
+  -webkit-box-shadow: 0px 4px 10px -3px rgba(117, 117, 117, 1);
+  -moz-box-shadow: 0px 4px 10px -3px rgba(117, 117, 117, 1);
+  box-shadow: 0px 4px 10px -3px rgba(117, 117, 117, 1);
+}
+
+.state {
+  margin-right: 1rem;
+}
+.state button,
+.message {
+  font-weight: 900;
+  font-family: var(--textFont);
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  border: none;
+}
+.complete,
+.correct {
+  background-color: rgba(154, 252, 154, 0.3);
+  color: var(--gray3);
+}
+.incomplete {
+  background-color: rgba(255, 178, 178, 0.4);
+  color: var(--gray3);
+}

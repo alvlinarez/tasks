@@ -1,0 +1,8 @@
+.tasksContainer {
+  padding: 4rem;
+}
+
+.tasksList {
+  max-width: 600px;
+  margin: 0 auto;
+}

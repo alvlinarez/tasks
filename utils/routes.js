@@ -5,7 +5,7 @@ export const routes = [
     type: 1
   },
   {
-    path: 'projects',
+    path: 'project',
     type: 1
   },
   {

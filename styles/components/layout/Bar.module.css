@@ -1,0 +1,24 @@
+.appHeader {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--gray2);
+  padding: 4rem;
+}
+.userName {
+  color: var(--white);
+  font-size: 2.2rem;
+  margin: 0;
+}
+.userName span {
+  font-weight: 900;
+}
+.navPrincipal a {
+  color: var(--white);
+  text-decoration: none;
+}
+.navPrincipal a:first-of-type {
+  margin-right: 2rem;
+}
+.signOut {
+  color: var(--white);
+}

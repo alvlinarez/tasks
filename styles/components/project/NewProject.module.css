@@ -1,0 +1,18 @@
+.newProjectForm {
+  margin-top: 6rem;
+}
+.newProjectForm .inputText {
+  border-bottom: 1px solid var(--gray2);
+  border-radius: 0;
+  background-color: var(--gray1);
+}
+.newProjectForm .inputText::placeholder {
+  color: var(--gray2);
+}
+.inputText {
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  flex: 1;
+  width: 100%;
+}
