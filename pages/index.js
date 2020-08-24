@@ -8,7 +8,7 @@ import TaskList from '../components/task/TaskList';
 export default function Home() {
   return (
     <>
-      <HeadSeo title="Projects" />
+      <HeadSeo title="Tasks" />
       <Layout>
         <TaskForm />
         <div className={styles.taskContainer}>

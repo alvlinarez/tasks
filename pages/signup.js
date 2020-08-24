@@ -6,7 +6,7 @@ import formStyles from '../styles/Forms.module.css';
 import buttonStyles from '../styles/Buttons.module.css';
 import Link from 'next/link';
 import HeadSeo from '../components/HeadSeo';
-import { AuthContext } from '../context/auth/authContext';
+import { AuthContext } from '../context/auth/AuthContext';
 import { useRouter } from 'next/router';
 import Spinner from '../components/Spinner';
 import { AlertContext } from '../context/alerts/alertContext';

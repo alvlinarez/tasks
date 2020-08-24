@@ -9,7 +9,7 @@ import formStyles from '../styles/Forms.module.css';
 import buttonStyles from '../styles/Buttons.module.css';
 import alertStyles from '../styles/Alerts.module.css';
 import HeadSeo from '../components/HeadSeo';
-import { AuthContext } from '../context/auth/authContext';
+import { AuthContext } from '../context/auth/AuthContext';
 import { AlertContext } from '../context/alerts/alertContext';
 
 const SignIn = () => {

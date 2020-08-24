@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
-import authReducer from './authReducer';
+import authReducer from './AuthReducer';
 import { axiosClient } from '../../config/axios';
-import { AuthContext } from './authContext';
+import { AuthContext } from './AuthContext';
 import {
   AUTH_LOADING,
   RESET_AUTH_MESSAGE,
@@ -75,16 +75,18 @@ export const AuthState = ({ user = {}, children }) => {
     }
   };
 
-  const signOut = async () => {
+  const signOut = async (router) => {
     dispatch({
       type: AUTH_LOADING
     });
     try {
-      const { data } = axiosClient().post('auth/signout');
+      const { data } = await axiosClient().post('auth/signout');
       dispatch({
         type: SIGN_OUT_SUCCESS,
         payload: data.message
       });
+      // redirect when user is signed out
+      router.push('/signin');
     } catch (e) {
       dispatch({
         type: SIGN_OUT_ERROR,

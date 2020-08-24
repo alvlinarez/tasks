@@ -8,7 +8,6 @@ import Bar from './layout/Bar';
 const Layout = ({ children }) => {
   return (
     <>
-      <HeadSeo title="Tasks" />
       <div className={layoutStyles.containerApp}>
         <Sidebar />
         <div className={layoutStyles.sectionPrincipal}>
