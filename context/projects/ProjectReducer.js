@@ -47,7 +47,6 @@ const ProjectReducer = (state, action) => {
         projects: state.projects.filter((item) => item.id === action.payload),
         currentProject: null
       };
-    case CURRENT_PROJECT_ERROR:
     case ADD_PROJECT_ERROR:
     case GET_PROJECTS_ERROR:
     case DELETE_PROJECT_ERROR:

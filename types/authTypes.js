@@ -10,3 +10,5 @@ export const SIGN_OUT_ERROR = 'SIGN_OUT_ERROR';
 export const RESET_AUTH_MESSAGE = 'RESET_AUTH_MESSAGE';
 
 export const AUTH_LOADING = 'AUTH_LOADING';
+
+export const CLEAR_ALL = 'CLEAR_ALL';

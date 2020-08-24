@@ -10,6 +10,7 @@ import { routes } from '../utils/routes';
 import Error from '../components/Error';
 import { AlertState } from '../context/alerts/AlertState';
 import { ProjectState } from '../context/projects/ProjectState';
+import TaskState from '../context/tasks/TaskState';
 
 export const redirectUser = (ctx, location) => {
   if (ctx.req) {
@@ -27,11 +28,13 @@ function MyApp({ Component, pageProps }) {
   }
   return (
     <ProjectState>
-      <AlertState>
-        <AuthState user={user}>
-          <Component {...pageProps} />
-        </AuthState>
-      </AlertState>
+      <TaskState>
+        <AlertState>
+          <AuthState user={user}>
+            <Component {...pageProps} />
+          </AuthState>
+        </AlertState>
+      </TaskState>
     </ProjectState>
   );
 }
