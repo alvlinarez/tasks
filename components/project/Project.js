@@ -13,6 +13,7 @@ const Project = ({ project }) => {
   const { getTasks } = taskContext;
 
   const handleClick = () => {
+    // when project is selecte, retrieve tasks of that projects to the state
     assignCurrentProject(project);
     getTasks(project.tasks);
   };

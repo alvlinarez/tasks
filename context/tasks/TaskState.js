@@ -18,7 +18,6 @@ import { axiosClient } from '../../config/axios';
 const TaskState = ({ children }) => {
   const initialState = {
     tasks: [],
-    currentTask: {},
     taskLoading: false,
     taskError: null
   };
@@ -37,24 +36,20 @@ const TaskState = ({ children }) => {
     });
   };
 
-  const assignCurrentTask = (task) => {
-    dispatch({
-      type: ASSIGN_CURRENT_TASK,
-      payload: task
-    });
-  };
-
-  const addTaskToProject = async (projectId, task) => {
+  const addTaskToProject = async (projectId, nameTask) => {
     dispatch({
       type: TASK_LOADING
     });
     try {
-      await axiosClient().put(`project/${projectId}`, {
-        taskId: task.id
+      const { data } = await axiosClient().post('task', {
+        name: nameTask
+      });
+      await axiosClient().put(`project/${projectId}/addTask`, {
+        taskId: data.task.id
       });
       dispatch({
         type: ADD_TASK_SUCCESS,
-        payload: task
+        payload: data.task
       });
     } catch (e) {
       dispatch({
@@ -69,7 +64,7 @@ const TaskState = ({ children }) => {
       type: TASK_LOADING
     });
     try {
-      await axiosClient().put(`project/${projectId}`, {
+      await axiosClient().put(`project/${projectId}/removeTask`, {
         taskId: task.id
       });
       dispatch({
@@ -93,7 +88,7 @@ const TaskState = ({ children }) => {
       const { data } = await axiosClient().put(`task/${id}`, { name, state });
       dispatch({
         type: UPDATE_TASK_SUCCESS,
-        payload: data
+        payload: data.task
       });
     } catch (e) {
       dispatch({
@@ -107,11 +102,9 @@ const TaskState = ({ children }) => {
     <TaskContext.Provider
       value={{
         tasks: state.tasks,
-        currentTask: state.currentTask,
         taskLoading: state.taskLoading,
         taskError: state.taskError,
         getTasks,
-        assignCurrentTask,
         addTaskToProject,
         removeTaskFromProject,
         updateTask

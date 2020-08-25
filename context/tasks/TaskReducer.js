@@ -1,7 +1,6 @@
 import {
   GET_TASKS_SUCCESS,
   GET_TASKS_ERROR,
-  ASSIGN_CURRENT_TASK,
   ADD_TASK_SUCCESS,
   ADD_TASK_ERROR,
   UPDATE_TASK_SUCCESS,
@@ -23,13 +22,6 @@ const TaskReducer = (state, action) => {
       return {
         ...state,
         tasks: action.payload,
-        taskLoading: false,
-        taskError: null
-      };
-    case ASSIGN_CURRENT_TASK:
-      return {
-        ...state,
-        currentTask: action.payload,
         taskLoading: false,
         taskError: null
       };
