@@ -16,7 +16,7 @@ import {
 
 export const ProjectState = ({ children }) => {
   const initialState = {
-    projects: [],
+    projects: null,
     currentProject: {},
     projectLoading: false,
     projectError: null
@@ -31,7 +31,7 @@ export const ProjectState = ({ children }) => {
       const { data } = await axiosClient().get('project');
       dispatch({
         type: GET_PROJECTS_SUCCESS,
-        payload: data
+        payload: data.projects
       });
     } catch (e) {
       dispatch({
@@ -48,7 +48,7 @@ export const ProjectState = ({ children }) => {
     });
   };
 
-  const createProject = async ({ name }) => {
+  const createProject = async (name) => {
     dispatch({
       type: PROJECT_LOADING
     });
@@ -56,7 +56,7 @@ export const ProjectState = ({ children }) => {
       const { data } = await axiosClient().post('project', { name });
       dispatch({
         type: ADD_PROJECT_SUCCESS,
-        payload: data
+        payload: data.project
       });
     } catch (e) {
       dispatch({

@@ -1,0 +1,12 @@
+.projects {
+  margin-top: 10rem;
+}
+.projectsList li {
+  margin-bottom: 2rem;
+}
+.projectsList li a {
+  font-size: 1.4rem;
+  color: var(--gray2);
+  line-height: 1.5;
+  font-weight: 300;
+}

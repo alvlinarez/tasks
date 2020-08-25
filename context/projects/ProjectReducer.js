@@ -30,7 +30,7 @@ const ProjectReducer = (state, action) => {
         ...state,
         projectLoading: false,
         projectError: null,
-        projects: action.payload
+        projects: [...state.projects, action.payload]
       };
     case ASSIGN_CURRENT_PROJECT:
       return {
