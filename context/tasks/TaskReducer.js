@@ -3,6 +3,9 @@ import {
   GET_TASKS_ERROR,
   ADD_TASK_SUCCESS,
   ADD_TASK_ERROR,
+  ASSIGN_CURRENT_TASK,
+  ASSIGN_CURRENT_TASK_ERROR,
+  RESET_CURRENT_TASK,
   UPDATE_TASK_SUCCESS,
   UPDATE_TASK_ERROR,
   REMOVE_TASK_SUCCESS,
@@ -31,13 +34,27 @@ const TaskReducer = (state, action) => {
         taskLoading: false,
         tasks: [...state.tasks, action.payload]
       };
+    case ASSIGN_CURRENT_TASK:
+      return {
+        ...state,
+        currentTask: action.payload
+      };
+    case ASSIGN_CURRENT_TASK_ERROR:
+      return {
+        ...state,
+        taskError: action.payload
+      };
+    case RESET_CURRENT_TASK:
+      return {
+        ...state,
+        currentTask: {}
+      };
     case UPDATE_TASK_SUCCESS:
       return {
         ...state,
         taskLoading: false,
-        currentTask: action.payload,
-        tasks: state.tasks.map((item) =>
-          item.id === action.payload.id ? action.payload : item
+        tasks: state.tasks.map((task) =>
+          task.id === action.payload.id ? action.payload : task
         )
       };
     case REMOVE_TASK_SUCCESS:

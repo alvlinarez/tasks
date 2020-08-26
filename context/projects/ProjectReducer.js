@@ -7,7 +7,9 @@ import {
   DELETE_PROJECT_ERROR,
   PROJECT_LOADING,
   RESET_PROJECT_STATE,
-  ASSIGN_CURRENT_PROJECT
+  ASSIGN_CURRENT_PROJECT,
+  UPDATE_PROJECT_TASKS_ERROR,
+  UPDATE_PROJECT_TASKS
 } from '../../types/projectTypes';
 
 const ProjectReducer = (state, action) => {
@@ -39,13 +41,23 @@ const ProjectReducer = (state, action) => {
         projectError: null,
         currentProject: action.payload
       };
+    case UPDATE_PROJECT_TASKS:
+      return {
+        ...state,
+        projects: state.projects.map((item) => {
+          if (item.id === action.payload.projectId) {
+            item.tasks = action.payload.tasks;
+          }
+          return item;
+        })
+      };
     case DELETE_PROJECT_SUCCESS:
       return {
         ...state,
         projectLoading: false,
         projectError: null,
         projects: state.projects.filter((item) => item.id === action.payload),
-        currentProject: null
+        currentProject: {}
       };
     case ADD_PROJECT_ERROR:
     case GET_PROJECTS_ERROR:

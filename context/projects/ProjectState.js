@@ -11,7 +11,9 @@ import {
   DELETE_PROJECT_SUCCESS,
   DELETE_PROJECT_ERROR,
   PROJECT_LOADING,
-  RESET_PROJECT_STATE
+  RESET_PROJECT_STATE,
+  UPDATE_PROJECT_TASKS_ERROR,
+  UPDATE_PROJECT_TASKS
 } from '../../types/projectTypes';
 
 export const ProjectState = ({ children }) => {
@@ -66,6 +68,23 @@ export const ProjectState = ({ children }) => {
     }
   };
 
+  const updateProjectTasks = (projectId, tasks) => {
+    if (!projectId || !tasks) {
+      dispatch({
+        type: UPDATE_PROJECT_TASKS_ERROR,
+        payload: 'Project tasks invalid'
+      });
+    } else {
+      dispatch({
+        type: UPDATE_PROJECT_TASKS,
+        payload: {
+          projectId,
+          tasks
+        }
+      });
+    }
+  };
+
   const deleteProject = async ({ id }) => {
     dispatch({
       type: PROJECT_LOADING
@@ -73,7 +92,8 @@ export const ProjectState = ({ children }) => {
     try {
       await axiosClient().delete(`project/${id}`);
       dispatch({
-        type: DELETE_PROJECT_SUCCESS
+        type: DELETE_PROJECT_SUCCESS,
+        payload: id
       });
     } catch (e) {
       dispatch({
@@ -93,6 +113,7 @@ export const ProjectState = ({ children }) => {
         getProjects,
         assignCurrentProject,
         createProject,
+        updateProjectTasks,
         deleteProject
       }}
     >

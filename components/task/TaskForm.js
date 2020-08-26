@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ProjectContext } from '../../context/projects/ProjectContext';
 import { useFormik } from 'formik';
 import { TaskContext } from '../../context/tasks/TaskContext';
@@ -7,23 +7,55 @@ import buttonStyles from '../../styles/Buttons.module.css';
 import messageStyles from '../../styles/Message.module.css';
 
 const TaskForm = () => {
-  const [showForm, setShowForm] = useState(false);
-
   const projectContext = useContext(ProjectContext);
-  const { currentProject, projectLoading, projectError } = projectContext;
+  const {
+    currentProject,
+    projectLoading,
+    projectError,
+    updateProjectTasks
+  } = projectContext;
 
   const taskContext = useContext(TaskContext);
-  const { addTaskToProject, taskError } = taskContext;
+  const {
+    addTaskToProject,
+    taskError,
+    currentTask,
+    resetCurrentTask,
+    updateTask,
+    tasks
+  } = taskContext;
 
+  const currentTaskHaveValues = Object.keys(currentTask).length > 0;
   const formik = useFormik({
     initialValues: {
       name: ''
     },
     onSubmit: (values) => {
-      addTaskToProject(currentProject.id, values.name);
-      formik.setValues({ name: '' });
+      // Add new task or update existing task
+      if (currentTaskHaveValues) {
+        updateTask({ ...currentTask, name: values.name });
+        resetCurrentTask(); // When updated reset currentTask
+      } else {
+        addTaskToProject(currentProject.id, values.name);
+      }
+      formik.setValues({
+        name: ''
+      });
     }
   });
+
+  useEffect(() => {
+    // Update form if it is to add or edit tasks
+    if (currentTaskHaveValues) {
+      formik.setValues({
+        name: currentTask.name
+      });
+    }
+    if (!taskError) {
+      // Update Tasks inside projects
+      updateProjectTasks(currentProject.id, tasks);
+    }
+  }, [currentTask]);
 
   if (Object.keys(currentProject).length === 0) {
     return null;
@@ -48,7 +80,7 @@ const TaskForm = () => {
             type="submit"
             className={`${buttonStyles.btn} ${buttonStyles.btnPrimary} ${buttonStyles.btnSubmit} ${buttonStyles.btnBlock}`}
           >
-            Add Task
+            {currentTaskHaveValues ? 'Update Task' : 'Add Task'}
           </button>
         </div>
       </form>

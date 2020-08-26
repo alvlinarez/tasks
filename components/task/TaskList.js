@@ -10,7 +10,7 @@ const TaskList = () => {
   const { currentProject, deleteProject } = projectContext;
 
   const taskContext = useContext(TaskContext);
-  const { tasks } = taskContext;
+  const { tasks, resetCurrentTask } = taskContext;
 
   if (Object.keys(currentProject).length === 0) {
     return <h2>Select one project</h2>;
@@ -18,6 +18,7 @@ const TaskList = () => {
 
   const handleDeleteProject = () => {
     deleteProject(currentProject);
+    resetCurrentTask(); // reset CurrentTask to edit when delete project
   };
 
   return (

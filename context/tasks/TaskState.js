@@ -11,13 +11,16 @@ import {
   GET_TASKS_SUCCESS,
   TASK_LOADING,
   UPDATE_TASK_ERROR,
-  UPDATE_TASK_SUCCESS
+  UPDATE_TASK_SUCCESS,
+  ASSIGN_CURRENT_TASK_ERROR,
+  RESET_CURRENT_TASK
 } from '../../types/taskTypes';
 import { axiosClient } from '../../config/axios';
 
 const TaskState = ({ children }) => {
   const initialState = {
     tasks: [],
+    currentTask: {}, // taskToEdit
     taskLoading: false,
     taskError: null
   };
@@ -41,15 +44,12 @@ const TaskState = ({ children }) => {
       type: TASK_LOADING
     });
     try {
-      const { data } = await axiosClient().post('task', {
+      const { data } = await axiosClient().put(`project/${projectId}/addTask`, {
         name: nameTask
-      });
-      await axiosClient().put(`project/${projectId}/addTask`, {
-        taskId: data.task.id
       });
       dispatch({
         type: ADD_TASK_SUCCESS,
-        payload: data.task
+        payload: data.taskAdded
       });
     } catch (e) {
       dispatch({
@@ -79,6 +79,25 @@ const TaskState = ({ children }) => {
     }
   };
 
+  const assignCurrentTask = (task) => {
+    if (!task) {
+      dispatch({
+        type: ASSIGN_CURRENT_TASK_ERROR,
+        payload: 'Error to get task to edit'
+      });
+    }
+    dispatch({
+      type: ASSIGN_CURRENT_TASK,
+      payload: task
+    });
+  };
+
+  const resetCurrentTask = () => {
+    dispatch({
+      type: RESET_CURRENT_TASK
+    });
+  };
+
   const updateTask = async (task) => {
     const { id, name, state } = task;
     dispatch({
@@ -104,9 +123,12 @@ const TaskState = ({ children }) => {
         tasks: state.tasks,
         taskLoading: state.taskLoading,
         taskError: state.taskError,
+        currentTask: state.currentTask,
         getTasks,
         addTaskToProject,
         removeTaskFromProject,
+        assignCurrentTask,
+        resetCurrentTask,
         updateTask
       }}
     >
