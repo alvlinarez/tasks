@@ -9,9 +9,16 @@
   },
   "dependencies": {
     "axios": "0.19.2",
+    "cookie-parser": "1.4.5",
+    "cors": "2.8.5",
+    "dotenv": "8.2.0",
+    "express": "4.17.1",
     "formik": "2.1.5",
     "next": "9.5.2",
     "normalize": "0.3.1",
+    "passport": "0.4.1",
+    "passport-facebook": "3.0.0",
+    "passport-google-oauth20": "2.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "yup": "0.29.3"

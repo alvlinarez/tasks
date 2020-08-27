@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 
 import Spinner from '../components/Spinner';
+import signInStyles from '../styles/pages/SignIn.module.css';
 import formStyles from '../styles/Forms.module.css';
 import buttonStyles from '../styles/Buttons.module.css';
 import alertStyles from '../styles/Alerts.module.css';
@@ -102,6 +103,14 @@ const SignIn = () => {
               )}
             </div>
           </form>
+          <div className={signInStyles.socialMediaContainer}>
+            <img src="/img/google-icon.png" alt="Google Icon" />
+            <a href="/auth/google">Sign In with Google</a>
+          </div>
+          <div className={signInStyles.socialMediaContainer}>
+            <img src="/img/facebook-icon.png" alt="Facebook Icon" />
+            <a href="/auth/facebook">Sign In with Facebook</a>
+          </div>
           <Link href="/signup">
             <a className={formStyles.linkAccount}>Sign Up</a>
           </Link>
