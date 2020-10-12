@@ -1,4 +1,4 @@
-import { axiosClient } from '../config/axios';
+const {axiosClient} = require('../config/axios');
 
 exports.authRoutes = (app) => {
   app.post('/auth/signin', async (req , res) => {
