@@ -1,6 +1,5 @@
 const express = require('express');
 const next = require('next');
-const axios = require('axios');
 const config = require('./server/config/index');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -20,37 +19,11 @@ app
     const server = express();
     server.use(cors());
     server.use(cookieParser());
+    server.use(bodyParser.urlencoded({extended: true}));
     server.use(bodyParser.json());
 
     // Route to sign in and generate cookie
-    //authRoutes(server);
-    server.post('/auth/signin', async (req, res) => {
-      const { email, password } = req.body;
-      if (!email || !password) {
-        return res.status(401).json({ error: 'Error at signing in' });
-      }
-      try {
-        const { data } = await axios.post(`${config.apiUrl}auth/signin`, {
-          email,
-          password
-        });
-        if (!data) {
-          return res
-            .status(401)
-            .json({ error: 'Error at signing in with Google' });
-        }
-        const { token, user } = data;
-        res.cookie('token', token, {
-          httpOnly: true,
-          secure: false
-        });
-        return res.status(200).json({
-          user
-        });
-      } catch (e) {
-        return res.status(401).json({ error: e.message });
-      }
-    });
+    authRoutes(server);
 
     // GOOGLE AND FACEBOOK AUTH ROUTES
     passportRoutes(server);
