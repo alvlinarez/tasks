@@ -13,6 +13,9 @@ exports.authRoutes = (app) => {
         {
           email,
           password
+        },
+        {
+          withCredentials: true
         }
       );
       if (!data) {
