@@ -1,4 +1,5 @@
-const {axiosClient} = require('../config/axios');
+const axios = require('axios');
+const config = require('./config/index');
 
 exports.authRoutes = (app) => {
   app.post('/auth/signin', async (req , res) => {
@@ -7,8 +8,8 @@ exports.authRoutes = (app) => {
       return res.status(401).json({ error: 'Error at signing in' });
     }
     try {
-      const { data } = await axiosClient().post(
-        `auth/signin`,
+      const { data } = await axios.post(
+        `${config.apiUrl}/auth/signin`,
         {
           email,
           password
