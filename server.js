@@ -2,6 +2,7 @@ const express = require('express');
 const next = require('next');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const { passportRoutes } = require('./server/passportRoutes');
 const { authRoutes } = require('./server/authRoutes');
 
@@ -17,6 +18,7 @@ app
     const server = express();
     server.use(cors());
     server.use(cookieParser());
+    server.use(bodyParser.json());
 
     // Route to sign in and generate cookie
     authRoutes(server);

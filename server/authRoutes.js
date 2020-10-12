@@ -9,7 +9,7 @@ exports.authRoutes = (app) => {
     }
     try {
       const { data } = await axios.post(
-        `${config.apiUrl}/auth/signin`,
+        `${config.apiUrl}auth/signin`,
         {
           email,
           password
