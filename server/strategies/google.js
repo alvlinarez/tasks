@@ -8,8 +8,8 @@ const config = require('../config');
 const googleOptions = {
   clientID: config.googleClientId,
   clientSecret: config.googleClientSecret,
-  //callbackURL: 'https://alvlinarez.dev/auth/google/callback'
-  callbackURL: '/auth/google/callback'
+  callbackURL: 'https://alg-tasks.herokuapp.com/auth/google/callback',
+  //callbackURL: '/auth/google/callback'
 };
 
 passport.use(
