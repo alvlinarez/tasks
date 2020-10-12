@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import authReducer from './AuthReducer';
 import { axiosClient } from '../../config/axios';
+import axios from 'axios';
 import { AuthContext } from './AuthContext';
 import {
   AUTH_LOADING,
@@ -29,7 +30,7 @@ export const AuthState = ({ user = {}, children }) => {
       type: AUTH_LOADING
     });
     try {
-      const { data } = await axiosClient().post('auth/signin', {
+      const { data } = await axios.post('auth/signin', {
         email,
         password
       });

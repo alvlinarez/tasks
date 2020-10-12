@@ -3,6 +3,7 @@ const next = require('next');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const { passportRoutes } = require('./server/passportRoutes');
+const { authRoutes } = require('./server/authRoutes');
 
 const dev = process.env.NODE_ENV !== 'production';
 const port = process.env.PORT || 3000;
@@ -16,6 +17,9 @@ app
     const server = express();
     server.use(cors());
     server.use(cookieParser());
+
+    // Route to sign in and generate cookie
+    authRoutes(server);
 
     // GOOGLE AND FACEBOOK AUTH ROUTES
     passportRoutes(server);
