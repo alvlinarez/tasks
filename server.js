@@ -5,7 +5,6 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const { passportRoutes } = require('./server/passportRoutes');
-const { authRoutes } = require('./server/authRoutes');
 
 const dev = config.env !== 'production';
 const port = config.port || 3000;
@@ -19,11 +18,8 @@ app
     const server = express();
     server.use(cors());
     server.use(cookieParser());
-    server.use(bodyParser.urlencoded({extended: true}));
+    server.use(bodyParser.urlencoded({ extended: true }));
     server.use(bodyParser.json());
-
-    // Route to sign in and generate cookie
-    authRoutes(server);
 
     // GOOGLE AND FACEBOOK AUTH ROUTES
     passportRoutes(server);
@@ -31,6 +27,7 @@ app
     server.get('*', (req, res) => {
       return handle(req, res);
     });
+
     server.listen(port, (err) => {
       if (err) throw err;
       console.log(`Running on port ${port}`);

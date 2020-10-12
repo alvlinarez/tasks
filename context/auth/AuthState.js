@@ -30,7 +30,7 @@ export const AuthState = ({ user = {}, children }) => {
       type: AUTH_LOADING
     });
     try {
-      const { data } = await axios.post('/auth/signin', {
+      const { data } = await axiosClient().post('auth/signin', {
         email,
         password
       });
