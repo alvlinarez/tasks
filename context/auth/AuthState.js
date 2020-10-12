@@ -33,7 +33,7 @@ export const AuthState = ({ user = {}, children }) => {
       const { data } = await axios.post('/auth/signin', {
         email,
         password
-      });
+      },{withCredentials: true});
       dispatch({
         type: SIGN_IN_SUCCESS,
         payload: data.user
