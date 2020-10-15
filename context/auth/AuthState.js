@@ -1,26 +1,28 @@
 import React, { useReducer } from 'react';
 import authReducer from './AuthReducer';
 import { axiosClient } from '../../config/axios';
-import axios from 'axios';
 import { AuthContext } from './AuthContext';
 import {
   AUTH_LOADING,
+  GET_SIGNED_USER,
+  GET_SIGNED_USER_ERROR,
   RESET_AUTH_MESSAGE,
   SIGN_IN_ERROR,
   SIGN_IN_SUCCESS,
-  SIGN_OUT_ERROR,
   SIGN_OUT_SUCCESS,
   SIGN_UP_ERROR,
   SIGN_UP_SUCCESS
 } from '../../types/authTypes';
+import { tokenAuth } from '../../config/tokenAuth';
 
 export const AuthState = ({ user = {}, children }) => {
   const initialState = {
     user,
     error: null,
-    authenticated: Object.keys(user).length > 0,
+    authenticated: false,
     message: null,
-    authLoading: false
+    authLoading: false,
+    getUserLoading: true
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);
@@ -34,6 +36,8 @@ export const AuthState = ({ user = {}, children }) => {
         email,
         password
       });
+      localStorage.setItem('token', data.token);
+      tokenAuth(data.token);
       dispatch({
         type: SIGN_IN_SUCCESS,
         payload: data.user
@@ -76,24 +80,29 @@ export const AuthState = ({ user = {}, children }) => {
     }
   };
 
-  const signOut = async (router) => {
-    dispatch({
-      type: AUTH_LOADING
-    });
+  const isAuthenticated = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      tokenAuth(token);
+    }
     try {
-      const { data } = await axiosClient().post('auth/signout');
+      const { data } = await axiosClient.get('auth');
       dispatch({
-        type: SIGN_OUT_SUCCESS,
-        payload: data.message
+        type: GET_SIGNED_USER,
+        payload: data.user
       });
-      // redirect when user is signed out
-      router.push('/signin');
     } catch (e) {
       dispatch({
-        type: SIGN_OUT_ERROR,
-        payload: e.response.data.error
+        type: GET_SIGNED_USER_ERROR
       });
     }
+  };
+
+  const signOut = () => {
+    localStorage.removeItem('token');
+    dispatch({
+      type: SIGN_OUT_SUCCESS
+    });
   };
 
   return (
@@ -104,6 +113,7 @@ export const AuthState = ({ user = {}, children }) => {
         error: state.error,
         message: state.message,
         authLoading: state.authLoading,
+        isAuthenticated,
         signUp,
         signIn,
         signOut

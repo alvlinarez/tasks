@@ -5,9 +5,11 @@ export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_ERROR = 'SIGN_UP_ERROR';
 
 export const SIGN_OUT_SUCCESS = 'SIGN_OUT_SUCCESS';
-export const SIGN_OUT_ERROR = 'SIGN_OUT_ERROR';
 
 export const RESET_AUTH_MESSAGE = 'RESET_AUTH_MESSAGE';
+
+export const GET_SIGNED_USER = 'GET_SIGNED_USER';
+export const GET_SIGNED_USER_ERROR = 'GET_SIGNED_USER_ERROR';
 
 export const AUTH_LOADING = 'AUTH_LOADING';
 
