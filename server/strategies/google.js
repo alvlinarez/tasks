@@ -8,7 +8,7 @@ const config = require('../config');
 const googleOptions = {
   clientID: config.googleClientId,
   clientSecret: config.googleClientSecret,
-  callbackURL: 'https://alg-tasks.herokuapp.com/auth/google/callback',
+  callbackURL: 'https://tasks.alvlinarez.dev/auth/google/callback',
   //callbackURL: '/auth/google/callback'
 };
 
