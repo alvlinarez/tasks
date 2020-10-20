@@ -10,6 +10,8 @@ Some features used:
 
 [See app in production](https://tasks.alvlinarez.dev)
 
+[See api](https://github.com/alvlinarez/tasks-server)
+
 ## Scripts
 
 * `npm install` to install dependencies
